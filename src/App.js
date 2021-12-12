@@ -30,7 +30,7 @@ function App() {
     } else {
       console.log("false");
     }
-  }, [turns]);
+  }, [turns, bestScore, match]);
   useEffect(() => {
     localStorage.setItem("highestScoresss", JSON.stringify(bestScore));
   });
