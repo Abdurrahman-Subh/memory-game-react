@@ -23,9 +23,7 @@ function App() {
   const [choiceTwo, setChoiceTwo] = useState(null); //Kullanici 2.karta basinca setChoiceTwo o karti alacak ve guncelliyecek
   const [disabled, setDisabled] = useState(false);
   useEffect(() => {
-    if (match === 6) {
-      const highScore = Math.min(turns, bestScore);
-      setBestScore(highScore);
+    if (match === 6 && Math.min(turns, bestScore) <= bestScore) {
       setBestScore(turns);
     } else {
       console.log("false");
@@ -40,11 +38,6 @@ function App() {
       setBestScore(JSON.parse(data));
     }
   }, [bestScore]);
-  // if (setWon === true) {
-  //   const highScore = Math.min(turns, bestScore);
-  //   setBestScore(highScore);
-  //   localStorage.setItem("bestScore", highScore);
-  // }
 
   //Kartlari karistir
   const shuffleCards = () => {
@@ -56,7 +49,8 @@ function App() {
     setChoiceOne(null);
     setChoiceTwo(null);
     setCards(shuffledCards); //Karistirlmis kartlari eksi kartlarin yerine getir
-    setTurns(0); //Restart basinca sira numarasini sifirlasin
+    setTurns(null); //Restart basinca sira numarasini sifirlasin
+    matchedCards(0);
   };
 
   //Secenegi isle
